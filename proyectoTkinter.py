@@ -64,7 +64,23 @@ def info():
 
     return True
 
+def addProducto():
+    products.append([
+        name_data.get(),
+        price_data.get(),
+        add_description_entry.get("1.0", "end-1c")
+    ])
+
+    # Se limpian los campos del formulario
+    name_data.set("")
+    price_data.set("")
+    add_description_entry.delete("1.0", END)
+
+    # Retorna a home
+    home()
+
 # Variables importantes
+products = []
 name_data = StringVar()
 price_data = StringVar()
 
@@ -87,7 +103,7 @@ add_description_label = Label(add_frame, text="Descripción:")
 add_description_entry = Text(add_frame)
 
 add_separator = Label(add_frame)
-boton = Button(add_frame, text="Guardar")
+boton = Button(add_frame, text="Guardar", command=addProducto)
 
 # Carga Menu
 home()
