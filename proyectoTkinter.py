@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import ttk
 
 # Definir ventana
 ventana = Tk()
@@ -15,8 +16,8 @@ def home():
     home_label.config(fg="white", bg="black", font=("Arial", 30), padx=210, pady=20)
     home_label.grid(row=0, column=0)
 
-    products_box.grid(row=1)
-
+    products_box.grid(row=2)
+    """
     # Se listan los productos
     for product in products:
         if len(product) == 3:
@@ -25,6 +26,13 @@ def home():
             Label(products_box, text=product[1]).grid()
             Label(products_box, text=product[2]).grid()
             Label(products_box, text="-----------------------------------").grid()
+    """
+    # Se va a mostrar en la tabla
+    for product in products:
+        if len(product) == 3:
+            product.append("added")
+            products_box.insert('', 0, text=product[0], values=(product[1]))
+            
 
     # Ocultar otras pantallas
     add_label.grid_remove()
@@ -69,7 +77,7 @@ def info():
     info_label.config(fg="white", bg="black", font=("Arial", 30), padx=150, pady=20)
     info_label.grid(row=0, column=0)
 
-    data_label.grid(row=1, column=0)
+    data_label.grid(row=2, column=0)
 
     # Ocultar otras pantallas
     home_label.grid_remove()
@@ -105,7 +113,15 @@ add_label = Label(ventana, text = "Añadir Producto")
 data_label = Label(ventana, text="Creado por Ismael")
 info_label = Label(ventana, text = "Información")
 
-products_box = Frame(ventana, width=250)
+#products_box = Frame(ventana, width=250)
+Label(ventana).grid(row=1)
+
+# Se crea una tabla para mostrar los productos
+#Label(products_box).grid(row=0)
+products_box = ttk.Treeview(height=12, columns=2)
+products_box.grid(row=1, column=0, columnspan=2)
+products_box.heading("#0", text="Producto", anchor=W)
+products_box.heading("#1", text="Precio", anchor=W)
 
 # Campos del formulario
 add_frame = Frame(ventana)
